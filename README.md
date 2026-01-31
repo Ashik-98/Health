@@ -16,8 +16,7 @@ The data pipeline consists of the following components:
    - Cleans and transforms the data.
    - Stores processed data in S3 (Parquet format).
 6. **AWS Glue Data Catalog**: Maintains metadata for querying via Athena.
-7. **Amazon Athena / Redshift**: Used for querying and analytics.
-8. **AWS SNS**: Sends job success/failure notifications.
+7. **AWS SNS**: Sends job success/failure notifications.
 
 ## Workflow
 1. **File Upload**: CSV files are uploaded to an S3 bucket (`Health_project/`).
@@ -30,14 +29,12 @@ The data pipeline consists of the following components:
    - Writes processed data to S3 (`Output_data/delta/`) in Parquet format.
 5. **Glue Data Catalog**: Updates metadata for Athena.
 6. **Amazon SNS**: Sends notifications on job **start, success, or failure**.
-7. **Athena / Redshift**: Used to query the transformed data.
 
 ## Technologies Used
 - **AWS S3** - Storage for raw & processed data.
 - **AWS Glue** - Serverless ETL for data transformation.
 - **AWS Lambda** - Serverless function to trigger Glue jobs.
 - **AWS SQS/SNS** - Manages file upload events.
-- **AWS Athena / Redshift** - Querying processed data.
 - **Apache Spark (PySpark)** - Data transformation in Glue.
 
 ## Code Explanation
@@ -128,7 +125,6 @@ joined_df.write.format("parquet").mode("overwrite").save(target_path)
 ## Monitoring & Logging
 - **AWS CloudWatch**: Monitor Lambda & Glue logs.
 - **SNS Notifications**: Receive alerts for job success/failure.
-- **Athena Queries**: Validate processed data.
 
 ## Conclusion
 This **serverless ETL pipeline** efficiently processes healthcare data using AWS Glue, Lambda, and SNS, ensuring real-time processing with minimal infrastructure management.
